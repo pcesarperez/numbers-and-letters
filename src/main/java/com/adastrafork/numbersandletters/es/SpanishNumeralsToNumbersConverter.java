@@ -41,8 +41,8 @@ public class SpanishNumeralsToNumbersConverter {
 
 				return numeralValues.v1 (oneWordNumeral);
 			} else if (r2Fired ( )) {
-				String tens = matcher.group ("r2x");
-				String units = matcher.group ("r2y");
+				String tens = matcher.group ("tens");
+				String units = matcher.group ("units");
 
 				return numeralValues.v2 (tens, units);
 			} else {
