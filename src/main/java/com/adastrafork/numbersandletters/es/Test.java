@@ -10,7 +10,7 @@ public class Test {
 		SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 		try {
-			System.out.println (numeralsConverter.convertNumeralToNumber ("noventa y nueve"));
+			System.out.println (numeralsConverter.convertNumeralToNumber ("cero"));
 		} catch (UnrecognizedNumeralException e) {
 			e.printStackTrace ( );
 		}

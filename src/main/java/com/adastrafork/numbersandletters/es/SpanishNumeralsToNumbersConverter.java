@@ -2,94 +2,82 @@ package com.adastrafork.numbersandletters.es;
 
 import com.adastrafork.numbersandletters.es.exceptions.UnrecognizedNumeralException;
 
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  * Class to convert Spanish numerals to their numeric equivalents.
  */
 public class SpanishNumeralsToNumbersConverter {
-	private Pattern numeralRecognitionPattern;
 	private SpanishNumeralValues numeralValues;
-	private Matcher matcher;
+	private SpanishNumeralRecognitionEngine numeralRecognitionEngine;
 
 
 	/**
 	 * Sets up the converter.
 	 */
 	public SpanishNumeralsToNumbersConverter ( ) {
-		numeralRecognitionPattern = new SpanishNumeralRecognitionPattern ( ).pattern ( );
+		numeralRecognitionEngine = new SpanishNumeralRecognitionEngine ( );
 		numeralValues = new SpanishNumeralValues ( );
 	}
 
 
 	/**
-	 * Converts a Spanish numeral to its numeric equivalent.
+	 * Converts a Spanish numeral expression to its numeric equivalent.
 	 *
-	 * @param numeral Spanish numeral to convert.
-	 * @return The numeric equivalent of the numeral.
+	 * @param numeralExpression Spanish numeral expression to convert.
+	 * @return The numeric equivalent of the numeral expression.
 	 * @throws UnrecognizedNumeralException
 	 */
-	public Integer convertNumeralToNumber (String numeral) throws UnrecognizedNumeralException {
-		matcher = numeralRecognitionPattern.matcher (numeral);
+	public Integer convertNumeralToNumber (String numeralExpression) throws UnrecognizedNumeralException {
+		return parseNumeralExpression (numeralExpression, numeralRecognitionEngine.fullPatternText ( ));
+	}
 
-		if (theNumeralIsValid ( )) {
-			if (r0Fired ( )) {
-				return numeralValues.v0 ( );
-			} else if (r1Fired ( )) {
-				String oneWordNumeral = matcher.group ("r1");
 
-				return numeralValues.v1 (oneWordNumeral);
-			} else if (r2Fired ( )) {
-				String tens = matcher.group ("tens");
-				String units = matcher.group ("units");
+	/**
+	 * Parses recursively a Spanish numeral expression to get its numeric equivalent.
+	 *
+	 * @param numeralExpression Spanish numeral expression to convert.
+	 * @param patternText       Pattern used to check the numeral expression.
+	 * @return The numeric equivalent of the numeral expression with the given pattern.
+	 * @throws UnrecognizedNumeralException
+	 */
+	private Integer parseNumeralExpression (String numeralExpression, String patternText) throws UnrecognizedNumeralException {
+		if (numeralRecognitionEngine.isFound (numeralExpression, patternText)) {
+			switch (numeralRecognitionEngine.ruleFired ( )) {
+				case r0:
+					return numeralValues.v0 ( );
 
-				return numeralValues.v2 (tens, units);
-			} else {
-				throw new UnrecognizedNumeralException ("The given numeral is not a valid Spanish numeral");
+				case r1:
+					return numeralValues.v1 (numeralExpression);
+
+				case r2:
+					//@formatter:off
+					return numeralValues.v2 (
+						numeralRecognitionEngine.prefix ( ),
+						numeralRecognitionEngine.suffix ( )
+					);
+					//@formatter:on
+
+				case r3:
+					return numeralValues.v3 ( );
+
+				case r4:
+					//@formatter:off
+					return
+						numeralValues.v4 ( ) +
+						parseNumeralExpression (
+							numeralRecognitionEngine.suffix ( ),
+							numeralRecognitionEngine.suffixPattern ( )
+						);
+					//@formatter:on
+
+				case no_rule_fired:
+					throw new UnrecognizedNumeralException ("The given numeral expression is not valid.");
+
+				default:
+					throw new UnrecognizedNumeralException ("The given numeral expression is not valid.");
 			}
 		} else {
-			throw new UnrecognizedNumeralException ("The given numeral is not a valid Spanish numeral");
+			throw new UnrecognizedNumeralException ("The given numeral expression is not valid.");
 		}
-	}
-
-
-	/**
-	 * Finds out if the numeral to convert is valid, this is, it has fired any of the conversion rules.
-	 *
-	 * @return Returns <code>true</code> if the converted numeral is valid, or <code>false</code> otherwise.
-	 */
-	private boolean theNumeralIsValid ( ) {
-		return matcher.matches ( );
-	}
-
-
-	/**
-	 * Finds out if the rule <code>r0</code> has been fired.
-	 *
-	 * @return Returns <code>true</code> if the rule <code>r0</code> has been fired, or <code>false</code> otherwise.
-	 */
-	private boolean r0Fired ( ) {
-		return matcher.group ("r0") != null;
-	}
-
-
-	/**
-	 * Finds out if the rule <code>r1</code> has been fired.
-	 *
-	 * @return Returns <code>true</code> if the rule <code>r1</code> has been fired, or <code>false</code> otherwise.
-	 */
-	private boolean r1Fired ( ) {
-		return matcher.group ("r1") != null;
-	}
-
-
-	/**
-	 * Finds out if the rule <code>r2</code> has been fired.
-	 *
-	 * @return Returns <code>true</code> if the rule <code>r2</code> has been fired, or <code>false</code> otherwise.
-	 */
-	private boolean r2Fired ( ) {
-		return matcher.group ("r2") != null;
 	}
 }
