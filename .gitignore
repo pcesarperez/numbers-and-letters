@@ -64,6 +64,7 @@ $RECYCLE.BIN/
 
 # Project specifics.
 
+.gradle
 .idea/workspace.xml
 .idea/dictionaries/adastra.xml
 build

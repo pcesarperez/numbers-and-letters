@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/numbers-and-letters.iml" filepath="$PROJECT_DIR$/numbers-and-letters.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/numbers-and-letters.iml" filepath="$PROJECT_DIR$/.idea/modules/numbers-and-letters.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/numbers-and-letters_main.iml" filepath="$PROJECT_DIR$/.idea/modules/numbers-and-letters_main.iml" group="numbers-and-letters" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/numbers-and-letters_test.iml" filepath="$PROJECT_DIR$/.idea/modules/numbers-and-letters_test.iml" group="numbers-and-letters" />
     </modules>
   </component>
 </project>

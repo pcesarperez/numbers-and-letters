@@ -22,11 +22,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="numbers-and-letters" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="numbers-and-letters" target="1.8" />
+      <module name="numbers-and-letters_main" target="1.8" />
+      <module name="numbers-and-letters_test" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
