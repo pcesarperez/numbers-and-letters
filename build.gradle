@@ -22,6 +22,21 @@ group = properties.assemblyGroup
 version = properties.assemblyVersion
 
 
+// MANIFEST.MF information.
+ext.sharedManifest = manifest {
+	attributes (
+		'Specification-Title': properties.specificationTitle,
+		'Specification-Version': properties.specificationVersion,
+		'Specification-Vendor': properties.specificationVendor,
+		'Implementation-Title': properties.implementationTitle,
+		'Implementation-Version': properties.implementationVersion,
+		'Implementation-Vendor': properties.implementationVendor,
+		'Main-Class': properties.mainClass,
+		'Class-Path': properties.classPath
+	)
+}
+
+
 // We are using both Maven central and the local Maven repo.
 repositories {
 	mavenCentral ( )
@@ -58,7 +73,7 @@ sourceSets {
 
 dependencies {
 	antlr "org.antlr:antlr4:4.5.3"
-	compile "org.antlr:antlr4-runtime:4.5.3"
+	runtime "org.antlr:antlr4-runtime:4.5.3"
 }
 
 
@@ -131,6 +146,10 @@ task createAssemblyDebug (type: Jar) {
 	destinationDir = file (properties.jarDebugDir)
 	baseName = properties.assemblyName
 	version = properties.assemblyVersion
+
+	manifest = project.manifest {
+		from sharedManifest
+	}
 }
 
 
@@ -142,4 +161,8 @@ task createAssemblyRelease (type: Jar) {
 	destinationDir = file (properties.jarReleaseDir)
 	baseName = properties.assemblyName
 	version = properties.assemblyVersion
+
+	manifest = project.manifest {
+		from sharedManifest
+	}
 }
