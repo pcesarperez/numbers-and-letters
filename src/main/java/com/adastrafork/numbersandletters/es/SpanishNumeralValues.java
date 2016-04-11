@@ -1,8 +1,10 @@
 package com.adastrafork.numbersandletters.es;
 
+
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+
 
 /**
  * Class to calculate the values associated to Spanish numerals.
@@ -16,7 +18,7 @@ public final class SpanishNumeralValues {
 	 *
 	 * @return An immutable map of numerals and their values.
 	 */
-	private static Map<String, Integer> createImmutableNumeralsMap ( ) {
+	private static final Map<String, Integer> createImmutableNumeralsMap ( ) {
 		Map<String, Integer> result = new HashMap<> ( );
 
 		result.put ("uno", 1);
@@ -72,76 +74,13 @@ public final class SpanishNumeralValues {
 
 
 	/**
-	 * Gets the value corresponding to the rule <code>r<sub>0</sub></code>.
-	 * <p/>
-	 * The numeral "cero" always yields the value 0.
+	 * Gets the numeric equivalent of the given Spanish numeral.
 	 *
-	 * @return The value corresponding to the rule <code>r<sub>0</sub></code>.
-	 */
-	public Integer v0 ( ) {
-		return 0;
-	}
-
-
-	/**
-	 * Gets the value corresponding to the rule <code>r<sub>1</sub></code>.
-	 * <p/>
-	 * <code>r<code>1</code></code> is a straightforward rule, with just one value to yield.
+	 * @param numeral Spanish numeral to convert into its numeric equivalent.
 	 *
-	 * @param numeral Numeral of the rule <code>r1</code> of which the value is to be extracted.
-	 * @return The value corresponding to the rule <code>r<sub>1</sub></code>.
+	 * @return Numeric equivalent of the given Spanish numeral.
 	 */
-	public Integer v1 (String numeral) {
+	public static Integer fromNumeral (String numeral) {
 		return SPANISH_NUMERAL_VALUES.get (numeral);
-	}
-
-
-	/**
-	 * Gets the value corresponding to the rule <code>r<sub>2</sub></code>.
-	 * <p/>
-	 * This is a compound rule, with two parts:
-	 * <ul>
-	 * <li>The first part contains the tens of the number.</li>
-	 * <li>The second part, if any, contains the units of the number.</li>
-	 * </ul>
-	 *
-	 * @param tens  Part of the numeral corresponding to the tens of the number.
-	 * @param units Part of the numeral corresponding to the units of the number (if any).
-	 * @return The value corresponding to the rule <code>r<sub>2</sub></code>.
-	 */
-	public Integer v2 (String tens, String units) {
-		Integer result = 0;
-
-		result += SPANISH_NUMERAL_VALUES.get (tens);
-
-		if (units != null) {
-			result += SPANISH_NUMERAL_VALUES.get (units);
-		}
-
-		return result;
-	}
-
-
-	/**
-	 * Gets the value corresponding to the rule <code>r<sub>3</sub></code>.
-	 * <p/>
-	 * The numeral "cien" always yields the value 100.
-	 *
-	 * @return The value corresponding to the rule <code>r<sub>3</sub></code>.
-	 */
-	public Integer v3 ( ) {
-		return 100;
-	}
-
-
-	/**
-	 * Gets the value corresponding to the rule <code>r<sub>4</sub></code>.
-	 * <p/>
-	 * The rule <code>r<sub>4</sub></code> is a compound rule, so we just return the fixed part.
-	 *
-	 * @return The value corresponding to the fixed part of the rule <code>r<sub>4</sub></code>.
-	 */
-	public Integer v4 ( ) {
-		return 100;
 	}
 }

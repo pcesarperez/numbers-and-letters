@@ -25,7 +25,7 @@ public class SpanishNumeralsParser extends Parser {
 		T__24=25, T__25=26, T__26=27, T__27=28, T__28=29, T__29=30, T__30=31, 
 		T__31=32, T__32=33, T__33=34, T__34=35, T__35=36, T__36=37, T__37=38, 
 		T__38=39, T__39=40, T__40=41, T__41=42, T__42=43, T__43=44, T__44=45, 
-		T__45=46, T__46=47, T__47=48, WHITESPACES=49, NEWLINE=50;
+		T__45=46, T__46=47, T__47=48, WHITESPACES=49;
 	public static final int
 		RULE_numeralExpression = 0, RULE_r0 = 1, RULE_r1 = 2, RULE_r2 = 3, RULE_r3 = 4, 
 		RULE_r4 = 5, RULE_r5 = 6, RULE_hundreds = 7, RULE_tens = 8, RULE_units = 9;
@@ -50,7 +50,7 @@ public class SpanishNumeralsParser extends Parser {
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, null, null, null, 
 		null, null, null, null, null, null, null, null, null, null, null, null, 
-		null, "WHITESPACES", "NEWLINE"
+		null, "WHITESPACES"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -120,7 +120,6 @@ public class SpanishNumeralsParser extends Parser {
 		public R5Context r5() {
 			return getRuleContext(R5Context.class,0);
 		}
-		public TerminalNode NEWLINE() { return getToken(SpanishNumeralsParser.NEWLINE, 0); }
 		public NumeralExpressionContext(ParserRuleContext parent, int invokingState) {
 			super(parent, invokingState);
 		}
@@ -137,7 +136,6 @@ public class SpanishNumeralsParser extends Parser {
 		enterRule(_localctx, 0, RULE_numeralExpression);
 		try {
 			enterOuterAlt(_localctx, 1);
-			{
 			{
 			setState(26);
 			switch (_input.LA(1)) {
@@ -221,11 +219,6 @@ public class SpanishNumeralsParser extends Parser {
 			default:
 				throw new NoViableAltException(this);
 			}
-			{
-			setState(28);
-			match(NEWLINE);
-			}
-			}
 			}
 		}
 		catch (RecognitionException re) {
@@ -258,7 +251,7 @@ public class SpanishNumeralsParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(30);
+			setState(28);
 			match(T__0);
 			}
 			}
@@ -293,7 +286,7 @@ public class SpanishNumeralsParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(32);
+			setState(30);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9) | (1L << T__10) | (1L << T__11) | (1L << T__12) | (1L << T__13) | (1L << T__14) | (1L << T__15) | (1L << T__16) | (1L << T__17) | (1L << T__18) | (1L << T__19) | (1L << T__20) | (1L << T__21) | (1L << T__22) | (1L << T__23) | (1L << T__24) | (1L << T__25) | (1L << T__26) | (1L << T__27) | (1L << T__28) | (1L << T__29))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -344,27 +337,27 @@ public class SpanishNumeralsParser extends Parser {
 			{
 			{
 			{
-			setState(34);
+			setState(32);
 			tens();
 			}
-			setState(40);
+			setState(38);
 			_la = _input.LA(1);
 			if (_la==WHITESPACES) {
 				{
 				{
 				{
+				setState(33);
+				match(WHITESPACES);
+				}
+				setState(34);
+				match(T__30);
+				{
 				setState(35);
 				match(WHITESPACES);
 				}
-				setState(36);
-				match(T__30);
+				}
 				{
 				setState(37);
-				match(WHITESPACES);
-				}
-				}
-				{
-				setState(39);
 				units();
 				}
 				}
@@ -403,7 +396,7 @@ public class SpanishNumeralsParser extends Parser {
 			enterOuterAlt(_localctx, 1);
 			{
 			{
-			setState(42);
+			setState(40);
 			match(T__31);
 			}
 			}
@@ -446,15 +439,15 @@ public class SpanishNumeralsParser extends Parser {
 			{
 			{
 			{
-			setState(44);
+			setState(42);
 			match(T__32);
 			}
 			{
 			{
-			setState(45);
+			setState(43);
 			match(WHITESPACES);
 			}
-			setState(48);
+			setState(46);
 			switch (_input.LA(1)) {
 			case T__1:
 			case T__2:
@@ -486,7 +479,7 @@ public class SpanishNumeralsParser extends Parser {
 			case T__28:
 			case T__29:
 				{
-				setState(46);
+				setState(44);
 				r1();
 				}
 				break;
@@ -498,7 +491,7 @@ public class SpanishNumeralsParser extends Parser {
 			case T__46:
 			case T__47:
 				{
-				setState(47);
+				setState(45);
 				r2();
 				}
 				break;
@@ -551,18 +544,18 @@ public class SpanishNumeralsParser extends Parser {
 			{
 			{
 			{
-			setState(50);
+			setState(48);
 			hundreds();
 			}
-			setState(56);
+			setState(54);
 			_la = _input.LA(1);
 			if (_la==WHITESPACES) {
 				{
 				{
-				setState(51);
+				setState(49);
 				match(WHITESPACES);
 				}
-				setState(54);
+				setState(52);
 				switch (_input.LA(1)) {
 				case T__1:
 				case T__2:
@@ -594,7 +587,7 @@ public class SpanishNumeralsParser extends Parser {
 				case T__28:
 				case T__29:
 					{
-					setState(52);
+					setState(50);
 					r1();
 					}
 					break;
@@ -606,7 +599,7 @@ public class SpanishNumeralsParser extends Parser {
 				case T__46:
 				case T__47:
 					{
-					setState(53);
+					setState(51);
 					r2();
 					}
 					break;
@@ -649,7 +642,7 @@ public class SpanishNumeralsParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(58);
+			setState(56);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__33) | (1L << T__34) | (1L << T__35) | (1L << T__36) | (1L << T__37) | (1L << T__38) | (1L << T__39) | (1L << T__40))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -688,7 +681,7 @@ public class SpanishNumeralsParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(60);
+			setState(58);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__41) | (1L << T__42) | (1L << T__43) | (1L << T__44) | (1L << T__45) | (1L << T__46) | (1L << T__47))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -727,7 +720,7 @@ public class SpanishNumeralsParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(62);
+			setState(60);
 			_la = _input.LA(1);
 			if ( !((((_la) & ~0x3f) == 0 && ((1L << _la) & ((1L << T__1) | (1L << T__2) | (1L << T__3) | (1L << T__4) | (1L << T__5) | (1L << T__6) | (1L << T__7) | (1L << T__8) | (1L << T__9))) != 0)) ) {
 			_errHandler.recoverInline(this);
@@ -748,23 +741,23 @@ public class SpanishNumeralsParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\64C\4\2\t\2\4\3\t"+
+		"\3\u0430\ud6d1\u8206\uad2d\u4417\uaef1\u8d80\uaadd\3\63A\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\4\13\t\13\3"+
-		"\2\3\2\3\2\3\2\3\2\3\2\5\2\35\n\2\3\2\3\2\3\3\3\3\3\4\3\4\3\5\3\5\3\5"+
-		"\3\5\3\5\3\5\5\5+\n\5\3\6\3\6\3\7\3\7\3\7\3\7\5\7\63\n\7\3\b\3\b\3\b\3"+
-		"\b\5\b9\n\b\5\b;\n\b\3\t\3\t\3\n\3\n\3\13\3\13\3\13\2\2\f\2\4\6\b\n\f"+
-		"\16\20\22\24\2\6\3\2\4 \3\2$+\3\2,\62\3\2\4\fA\2\34\3\2\2\2\4 \3\2\2\2"+
-		"\6\"\3\2\2\2\b$\3\2\2\2\n,\3\2\2\2\f.\3\2\2\2\16\64\3\2\2\2\20<\3\2\2"+
-		"\2\22>\3\2\2\2\24@\3\2\2\2\26\35\5\4\3\2\27\35\5\6\4\2\30\35\5\b\5\2\31"+
-		"\35\5\n\6\2\32\35\5\f\7\2\33\35\5\16\b\2\34\26\3\2\2\2\34\27\3\2\2\2\34"+
-		"\30\3\2\2\2\34\31\3\2\2\2\34\32\3\2\2\2\34\33\3\2\2\2\35\36\3\2\2\2\36"+
-		"\37\7\64\2\2\37\3\3\2\2\2 !\7\3\2\2!\5\3\2\2\2\"#\t\2\2\2#\7\3\2\2\2$"+
-		"*\5\22\n\2%&\7\63\2\2&\'\7!\2\2\'(\7\63\2\2()\3\2\2\2)+\5\24\13\2*%\3"+
-		"\2\2\2*+\3\2\2\2+\t\3\2\2\2,-\7\"\2\2-\13\3\2\2\2./\7#\2\2/\62\7\63\2"+
-		"\2\60\63\5\6\4\2\61\63\5\b\5\2\62\60\3\2\2\2\62\61\3\2\2\2\63\r\3\2\2"+
-		"\2\64:\5\20\t\2\658\7\63\2\2\669\5\6\4\2\679\5\b\5\28\66\3\2\2\28\67\3"+
-		"\2\2\29;\3\2\2\2:\65\3\2\2\2:;\3\2\2\2;\17\3\2\2\2<=\t\3\2\2=\21\3\2\2"+
-		"\2>?\t\4\2\2?\23\3\2\2\2@A\t\5\2\2A\25\3\2\2\2\7\34*\628:";
+		"\2\3\2\3\2\3\2\3\2\3\2\5\2\35\n\2\3\3\3\3\3\4\3\4\3\5\3\5\3\5\3\5\3\5"+
+		"\3\5\5\5)\n\5\3\6\3\6\3\7\3\7\3\7\3\7\5\7\61\n\7\3\b\3\b\3\b\3\b\5\b\67"+
+		"\n\b\5\b9\n\b\3\t\3\t\3\n\3\n\3\13\3\13\3\13\2\2\f\2\4\6\b\n\f\16\20\22"+
+		"\24\2\6\3\2\4 \3\2$+\3\2,\62\3\2\4\f?\2\34\3\2\2\2\4\36\3\2\2\2\6 \3\2"+
+		"\2\2\b\"\3\2\2\2\n*\3\2\2\2\f,\3\2\2\2\16\62\3\2\2\2\20:\3\2\2\2\22<\3"+
+		"\2\2\2\24>\3\2\2\2\26\35\5\4\3\2\27\35\5\6\4\2\30\35\5\b\5\2\31\35\5\n"+
+		"\6\2\32\35\5\f\7\2\33\35\5\16\b\2\34\26\3\2\2\2\34\27\3\2\2\2\34\30\3"+
+		"\2\2\2\34\31\3\2\2\2\34\32\3\2\2\2\34\33\3\2\2\2\35\3\3\2\2\2\36\37\7"+
+		"\3\2\2\37\5\3\2\2\2 !\t\2\2\2!\7\3\2\2\2\"(\5\22\n\2#$\7\63\2\2$%\7!\2"+
+		"\2%&\7\63\2\2&\'\3\2\2\2\')\5\24\13\2(#\3\2\2\2()\3\2\2\2)\t\3\2\2\2*"+
+		"+\7\"\2\2+\13\3\2\2\2,-\7#\2\2-\60\7\63\2\2.\61\5\6\4\2/\61\5\b\5\2\60"+
+		".\3\2\2\2\60/\3\2\2\2\61\r\3\2\2\2\628\5\20\t\2\63\66\7\63\2\2\64\67\5"+
+		"\6\4\2\65\67\5\b\5\2\66\64\3\2\2\2\66\65\3\2\2\2\679\3\2\2\28\63\3\2\2"+
+		"\289\3\2\2\29\17\3\2\2\2:;\t\3\2\2;\21\3\2\2\2<=\t\4\2\2=\23\3\2\2\2>"+
+		"?\t\5\2\2?\25\3\2\2\2\7\34(\60\668";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

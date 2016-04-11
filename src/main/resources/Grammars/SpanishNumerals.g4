@@ -18,7 +18,7 @@ grammar SpanishNumerals;
  * This is the root rule.
  * Any Spanish numeral should fit one of the inner rules.
  */
-numeralExpression : ((r0 | r1 | r2 | r3 | r4 | r5) (NEWLINE));
+numeralExpression : (r0 | r1 | r2 | r3 | r4 | r5);
 
 
 /*
@@ -153,9 +153,3 @@ units: (
  * Helper token to hold an arbitrary number of whitespaces.
  */
 WHITESPACES: [ \t]+;
-
-
-/*
- * Helper token to hold an arbitrary number of newline characters.
- */
-NEWLINE: [\r\n]+;
