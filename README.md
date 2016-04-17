@@ -21,7 +21,7 @@ But I'm planning for the future. That's what I would like to achieve:
 
 1. Expand the range of accepted Spanish numerals to:
 	- Thousands. For example "mil" (1000), "tres mil uno" (3001) or "dos mil cuatrocientos cincuenta y ocho" (2458).
-	- Millions. Well, you get the idea.
+	- Millions, then. You get the idea.
 2. Add an English mode, using [short scale](https://en.wikipedia.org/wiki/Long_and_short_scales), up to millions.
 3. Add a French mode, using long scale, up to millions.
 4. Expand the range of accepted Spanish numerals to weird numbers in the long scale, like "millardos" (10<sup>9</sup>).
@@ -37,7 +37,7 @@ In order to build the library, you just need to navigate to the project folder a
 $ gradle
 ```
 
-The `.jar` files are placed under the folder `[dist/debug]` and `[dist/release]`.
+The `.jar` files are placed under the folders `[dist/debug]` and `[dist/release]`.
 
 ## How to install the library in your local Maven repository
 
@@ -49,8 +49,8 @@ $ gradle publishToMavenLocal
 
 These are the Maven coordinates of the library, which you can see in the `build.properties` file:
 
-* Group: com.adastrafork
-* Artifact: numbers-and-letters
+* Group: `com.adastrafork`
+* Artifact: `numbers-and-letters`
 * Version: 1.0
 
 ## How to test the library
@@ -65,14 +65,14 @@ $ java -cp "dist/debug/numbers-and-letters-1.0.jar:lib/antlr-runtime-4.5.3.jar" 
 
 Where `{spanishNumeral}` is whatever Spanish numeral you want to convert (for example, "ciento noventa y nueve"), within the [0, 999] range. Don't forget the double quotes!
 
-Note you have to place the ANTLR runtime JAR in any accesible location (folder `[lib]`, in this case).
+Note you have to download and place the [ANTLR4 runtime JAR](http://mvnrepository.com/artifact/org.antlr/antlr4-runtime/4.5.3) in any accesible location (folder `[lib]` below the project root folder, in this case).
 
 ## How to use the library
 
 To use the library, you just have to import it into your project, either directly or using Maven/Gradle, along with the following dependency:
 
-* Group: org.antlr
-* Artifact: antlr4-runtime
+* Group: `org.antlr`
+* Artifact: `antlr4-runtime`
 * Version: 4.5.3
 
 Then, you have to instantiate the class `SpanishNumeralsToNumbersConverter`, which has a public method named `convertNumeralToNumber ( )`.
@@ -83,8 +83,10 @@ For instance:
 SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 try {
-    System.out.println (numeralsConverter.convertNumeralToNumber ("ciento noventa y nueve"));
+	System.out.println (numeralsConverter.convertNumeralToNumber ("novecientos noventa y nueve"));
 } catch (UnrecognizedNumeralException e) {
-    e.printStackTrace ( );
+	e.printStackTrace ( );
 }
 ```
+
+When the parser encounters a syntax error, it throws an `UnrecognizedNumeralException` and aborts the parsing process, thus capturing invalid numerals.

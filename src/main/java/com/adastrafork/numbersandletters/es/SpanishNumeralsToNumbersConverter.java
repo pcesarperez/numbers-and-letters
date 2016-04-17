@@ -1,6 +1,7 @@
 package com.adastrafork.numbersandletters.es;
 
 
+import com.adastrafork.numbersandletters.ThrowingErrorListener;
 import com.adastrafork.numbersandletters.es.antlr4.SpanishNumeralsLexer;
 import com.adastrafork.numbersandletters.es.antlr4.SpanishNumeralsParser;
 import com.adastrafork.numbersandletters.es.exceptions.UnrecognizedNumeralException;
@@ -32,13 +33,52 @@ public class SpanishNumeralsToNumbersConverter {
 	 * @throws UnrecognizedNumeralException
 	 */
 	public Integer convertNumeralToNumber (String numeralExpression) throws UnrecognizedNumeralException {
-		SpanishNumeralsLexer lexer = new SpanishNumeralsLexer (new ANTLRInputStream (numeralExpression));
-		SpanishNumeralsParser parser = new SpanishNumeralsParser (new CommonTokenStream (lexer));
+		SpanishNumeralsLexer lexer = newLexer (numeralExpression);
+		SpanishNumeralsParser parser = newParser (lexer);
+
+		ParseTree tree;
+		try {
+			tree = parser.numeralExpression ( );
+		} catch (Exception e) {
+			throw new UnrecognizedNumeralException ("The Spanish numeral expression is not valid: ", e);
+		}
+
 		SpanishNumeralRecognitionEngine engine = new SpanishNumeralRecognitionEngine ( );
-		ParseTree tree = parser.numeralExpression ( );
 
-		Integer result = engine.visit (tree);
+		return engine.visit (tree);
+	}
 
-		return result;
+
+	/**
+	 * Sets up a new Spanish numerals lexer with proper error handling attached.
+	 *
+	 * @param numeralExpression Spanish numeral expression to parse.
+	 *
+	 * @return An object of type <code>SpanishNumeralsLexer</code> to perform the lexical analysis of the Spanish numeral expression.
+	 */
+	private SpanishNumeralsLexer newLexer (String numeralExpression) {
+		SpanishNumeralsLexer lexer = new SpanishNumeralsLexer (new ANTLRInputStream (numeralExpression));
+
+		lexer.removeErrorListeners ( );
+		lexer.addErrorListener (ThrowingErrorListener.INSTANCE);
+
+		return lexer;
+	}
+
+
+	/**
+	 * Sets up a new Spanish numerals parser with proper error handling attached.
+	 *
+	 * @param lexer An object of type <code>SpanishNumeralsLexer</code> to perform the lexical analysis of a Spanish numeral expression.
+	 *
+	 * @return An object of type <code>SpanishNumeralsParser</code> to perform the parsing of a Spanish numeral expression.
+	 */
+	private SpanishNumeralsParser newParser (SpanishNumeralsLexer lexer) {
+		SpanishNumeralsParser parser = new SpanishNumeralsParser (new CommonTokenStream (lexer));
+
+		parser.removeErrorListeners ( );
+		parser.addErrorListener (ThrowingErrorListener.INSTANCE);
+
+		return parser;
 	}
 }

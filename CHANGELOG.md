@@ -1,5 +1,17 @@
 # Changelog
 
+## 17/04/2016 v1.0 RC3
+
+Almost done!
+
+The one thing that the previous version lacked of, was proper error handling.
+
+I found this fantastic answer about [handling errors in ANTLR4](http://stackoverflow.com/a/26573239/4491468), and used it, line by line. It worked like a charm, because the idea here was to abort the parsing process as soon as any kind of error arose, either lexical or syntactic.
+
+So, when you try to convert an invalid Spanish numeral, like "noventa y **foo**" or "cuarenta**aaa**", the converter throws an `UnrecognizedNumeralException` which, itself, contains an internal `ParseCancellationException` with information about the point in the numeral expression where the process stopped.
+
+In the road to version 1.0 final, the only thing that remains is expanding the accepted range of Spanish numerals to, say, quintillions (in the [long scale](https://en.wikipedia.org/wiki/Long_and_short_scales)), one release candidate at a time.
+
 ## 15/04/2016 v1.0 RC2
 
 Well, I threw most of the previous work through the window.
