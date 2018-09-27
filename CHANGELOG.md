@@ -1,5 +1,15 @@
 # Changelog
 
+## 27/09/2018 v1.0 RC4
+
+It's been a long time...
+
+Yeah, two and a half years without a single commit. But hey, still alive and kicking.
+
+I have added the long overdue unit tests, so there's no need for a `Test` class. However, the class is still included and mentioned in the `README.md` file, but I'll leave that for the next RC.
+
+I have been thinking about the scope of the library. I intended to create a full-fledged numerals converter in the long scale, but, on second thought, I prefer to release numerals conversion up to 999 in several languages (Spanish, English, French and German) to begin with). So that's the roadmap, for now.
+
 ## 17/04/2016 v1.0 RC3
 
 Almost done!
@@ -18,7 +28,7 @@ Well, I threw most of the previous work through the window.
 
 The first thing I have changed is the building system. I confess I am in love with the Ant + Maven mix of the previous version, but, being honest, this is a rather weird approach.
 
-I am using this mix in my daytime job, but I am a bit unconfortable with it. The last version of the Maven Ant Tasks library (2.1.3) was packaged on 05/09/2012, and although is a fairly robust piece of code, is a bit outdated.
+I am using this mix in my daytime job, but I am a bit uncomfortable with it. The last version of the Maven Ant Tasks library (2.1.3) was packaged on 05/09/2012, and although is a fairly robust piece of code, is a bit outdated.
 
 Then came Gradle. It's been a while since I started reading about it, with the secret and dirty desire of changing the build scripts in all my projects.
 
@@ -38,7 +48,7 @@ I flirted with the idea of using standard, numbered groups, but imagine a rule l
 r8 = (((r1b | r2a | r3a | r4a | r5a | r6a) WHITESPACES) (millones) ((WHITESPACES) (r1 | r2 | r3 | r4 | r5 | r6))?)
 ```
 
-This rule, once unfolded, has several dozens of lines, full of parens and repeating numeral strings. I am pretty good at regular expressions, but this is unmanageable, to say the least.
+This rule, once unfolded, has several dozens of lines, full of parentheses and repeating numeral strings. I am pretty good at regular expressions, but this is unmanageable, to say the least.
 
 Wandering through StackOverflow, I realized I have been creating a formal grammar to construct numeral expressions in Spanish the whole time. And there is a fantastic tool which is perfect regarding to parser/lexer generation based on formal grammars: [ANTLR](http://www.antlr.org/).
 
