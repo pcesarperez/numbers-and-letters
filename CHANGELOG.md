@@ -8,7 +8,7 @@ Yeah, two and a half years without a single commit. But hey, still alive and kic
 
 I have added the long overdue unit tests, so there's no need for a `Test` class. However, the class is still included and mentioned in the `README.md` file, but I'll leave that for the next RC.
 
-I have been thinking about the scope of the library. I intended to create a full-fledged numerals converter in the long scale, but, on second thought, I prefer to release numerals conversion up to 999 in several languages (Spanish, English, French and German) to begin with). So that's the roadmap, for now.
+I have been thinking about the scope of the library. I intended to create a full-fledged numerals converter in the long scale, but, on second thought, I prefer to release numerals conversion up to 999 in several languages (Spanish, English, French and German) to begin with. So that's the roadmap, for now.
 
 ## 17/04/2016 v1.0 RC3
 
