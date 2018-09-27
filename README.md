@@ -20,8 +20,8 @@ I am Spanish, so I am building Spanish mode first. The library performs conversi
 But I'm planning for the future. That's what I would like to achieve:
 
 1. Expand the range of accepted Spanish numerals to:
-	- Thousands. For example "mil" (1000), "tres mil uno" (3001) or "dos mil cuatrocientos cincuenta y ocho" (2458).
-	- Millions, then. You get the idea.
+    - Thousands. For example "mil" (1000), "tres mil uno" (3001) or "dos mil cuatrocientos cincuenta y ocho" (2458).
+    - Millions, then. You get the idea.
 2. Add an English mode, using [short scale](https://en.wikipedia.org/wiki/Long_and_short_scales), up to millions.
 3. Add a French mode, using long scale, up to millions.
 4. Expand the range of accepted Spanish numerals to weird numbers in the long scale, like "millardos" (10<sup>9</sup>).
@@ -83,9 +83,9 @@ For instance:
 SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 try {
-	System.out.println (numeralsConverter.convertNumeralToNumber ("novecientos noventa y nueve"));
+    System.out.println (numeralsConverter.convertNumeralToNumber ("novecientos noventa y nueve"));
 } catch (UnrecognizedNumeralException e) {
-	e.printStackTrace ( );
+    e.printStackTrace ( );
 }
 ```
 
