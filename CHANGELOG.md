@@ -1,6 +1,6 @@
 # Changelog
 
-## 28/09/2018 v1.0 RC5
+## 28/09/2018 v1.0RC5
 
 A bit of tidying up, including...
 
@@ -9,8 +9,9 @@ A bit of tidying up, including...
 * Removing the `SpanishNumeralRule` class.
 * Reordering the packages.
 * Creating packages for the future English, German and French converters.
+* Creating a base interface which every converter should stick to.
 
-## 27/09/2018 v1.0 RC4
+## 27/09/2018 v1.0RC4
 
 It's been a long time...
 
@@ -20,7 +21,7 @@ I have added the long overdue unit tests, so there's no need for a `Test` class.
 
 I have been thinking about the scope of the library. I intended to create a full-fledged numerals converter in the long scale, but, on second thought, I prefer to release numerals conversion up to 999 in several languages (Spanish, English, French and German) to begin with. So that's the roadmap, for now.
 
-## 17/04/2016 v1.0 RC3
+## 17/04/2016 v1.0RC3
 
 Almost done!
 
@@ -32,7 +33,7 @@ So, when you try to convert an invalid Spanish numeral, like "noventa y **foo**"
 
 In the road to version 1.0 final, the only thing that remains is expanding the accepted range of Spanish numerals to, say, quintillions (in the [long scale](https://en.wikipedia.org/wiki/Long_and_short_scales)), one release candidate at a time.
 
-## 15/04/2016 v1.0 RC2
+## 15/04/2016 v1.0RC2
 
 Well, I threw most of the previous work through the window.
 
@@ -64,7 +65,7 @@ Wandering through StackOverflow, I realized I have been creating a formal gramma
 
 There is a lot to do, though. This version covers numerals from "cero" (0) to "novecientos noventa y nueve" (999), but the treatment of ill-formed numerals is non-existent. That's the next step (and extending the range of accepted numerals also).
 
-## 02/04/2016 v1.0 RC1
+## 02/04/2016 v1.0RC1
 
 This is the first version of the library.
 
