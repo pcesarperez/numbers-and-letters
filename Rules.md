@@ -41,3 +41,15 @@ The fifth rule is similar to the previous one, replacing the prefix with a set o
 ```
 r5 = (('doscientos' | ... | 'novecientos') (\s+ (r1 | r2))?)
 ```
+
+## English mode
+
+Not there yet...
+
+## French mode
+
+Not there yet...
+
+## German mode
+
+Not there yet...

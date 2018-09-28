@@ -11,47 +11,41 @@ apply plugin: 'java'
 apply plugin: 'antlr'
 apply plugin: 'maven-publish'
 
-
 // External properties.
 Properties properties = new Properties()
-properties.load (new FileInputStream ('build.properties'))
-
+properties.load(new FileInputStream('build.properties'))
 
 // Maven coordinates.
 group = properties.assemblyGroup
 version = properties.assemblyVersion
 
-
 // MANIFEST.MF information.
 ext.sharedManifest = manifest {
-	attributes (
-		'Specification-Title': properties.specificationTitle,
-		'Specification-Version': properties.specificationVersion,
-		'Specification-Vendor': properties.specificationVendor,
-		'Implementation-Title': properties.implementationTitle,
-		'Implementation-Version': properties.implementationVersion,
-		'Implementation-Vendor': properties.implementationVendor,
-		'Main-Class': properties.mainClass,
-		'Class-Path': properties.classPath
-	)
+    attributes(
+            'Specification-Title': properties.specificationTitle,
+            'Specification-Version': properties.specificationVersion,
+            'Specification-Vendor': properties.specificationVendor,
+            'Implementation-Title': properties.implementationTitle,
+            'Implementation-Version': properties.implementationVersion,
+            'Implementation-Vendor': properties.implementationVendor,
+            'Class-Path': properties.classPath
+    )
 }
-
 
 // We are using both Maven central and the local Maven repo.
 repositories {
-	mavenCentral ( )
-	mavenLocal ( )
+    mavenCentral()
+    mavenLocal()
 }
 
 // Use `gradle publishToMavenLocal` to upload the assembly to the local Maven repository.
 publishing {
-	publications {
-		mavenJava (MavenPublication) {
-			from components.java
-		}
-	}
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
 }
-
 
 // Compiler settings.
 sourceCompatibility = properties.sourceCompatibility
@@ -59,110 +53,111 @@ targetCompatibility = properties.targetCompatibility
 
 
 generateGrammarSource {
-	outputDirectory = new File (properties.antlrGeneratedSourceDir)
-	arguments += ['-visitor', '-no-listener']
+    outputDirectory = new File(properties.antlrGeneratedSourceDir)
+    arguments += ['-visitor', '-no-listener']
 }
-
 
 // This seems to be the way to tell ANTLR plugin where the grammar is.
 // That is, if the grammar is not placed in the default location.
 sourceSets {
-	main.antlr.srcDirs = [properties.antlrGrammarsDir]
+    main.antlr.srcDirs = [properties.antlrGrammarsDir]
 }
 
 
 dependencies {
-	antlr "org.antlr:antlr4:4.5.3"
-	runtime "org.antlr:antlr4-runtime:4.5.3"
+    antlr "org.antlr:antlr4:4.5.3"
+    runtime "org.antlr:antlr4-runtime:4.5.3"
+    testImplementation ('org.junit.jupiter:junit-jupiter-api:5.1.0')
+    testRuntimeOnly ('org.junit.jupiter:junit-jupiter-engine:5.1.0')
 }
 
 
 task info {
-	info.description = 'Shows assembly information.'
+    info.description = 'Shows assembly information.'
 
-	doFirst ( ) {
-		println ''
-		println '\t|Assembly info:'
-		println '\t|'
-		println '\t|\tgroupId: ' + properties.assemblyGroup
-		println '\t|\tartifactId: ' + properties.assemblyName
-		println '\t|\tversion: ' + properties.assemblyVersion
-	}
+    doFirst() {
+        println ''
+        println '\t|Assembly info:'
+        println '\t|'
+        println '\t|\tgroupId: ' + properties.assemblyGroup
+        println '\t|\tartifactId: ' + properties.assemblyName
+        println '\t|\tversion: ' + properties.assemblyVersion
+    }
 }
 
 classes {
-	actions = []
+    actions = []
 }
 
 
-task compileDebug (type: JavaCompile) {
-	compileDebug.description = 'Compiles the source code with debug symbols.'
-	compileDebug.dependsOn 'generateGrammarSource'
+task compileDebug(type: JavaCompile) {
+    compileDebug.description = 'Compiles the source code with debug symbols.'
+    compileDebug.dependsOn 'generateGrammarSource'
 
-	source = fileTree (dir: properties.mainSourceDir, include: '**/*.java')
-	destinationDir = sourceSets.main.output.classesDir
-	classpath = project.sourceSets.main.compileClasspath
+    source = fileTree(dir: properties.mainSourceDir, include: '**/*.java')
+    destinationDir = sourceSets.main.output.classesDir
+    classpath = project.sourceSets.main.compileClasspath
 
-	options.fork = properties.compilerFork.toBoolean ( )
-	options.incremental = properties.incrementalBuild.toBoolean ( )
-	options.encoding = properties.sourceEncoding
-	options.verbose = properties.verboseBuild.toBoolean ( )
-	options.debug = true
-	options.debugOptions.debugLevel = 'source,lines,vars'
+    options.fork = properties.compilerFork.toBoolean()
+    options.incremental = properties.incrementalBuild.toBoolean()
+    options.encoding = properties.sourceEncoding
+    options.verbose = properties.verboseBuild.toBoolean()
+    options.debug = true
+    options.debugOptions.debugLevel = 'source,lines,vars'
 }
 
 
-task compileRelease (type: JavaCompile) {
-	compileRelease.description = 'Compiles the source code without debug symbols.'
-	compileRelease.dependsOn 'generateGrammarSource'
+task compileRelease(type: JavaCompile) {
+    compileRelease.description = 'Compiles the source code without debug symbols.'
+    compileRelease.dependsOn 'generateGrammarSource'
 
-	source = fileTree (dir: properties.mainSourceDir, include: '**/*.java')
-	destinationDir = sourceSets.main.output.classesDir
-	classpath = project.sourceSets.main.compileClasspath
+    source = fileTree(dir: properties.mainSourceDir, include: '**/*.java')
+    destinationDir = sourceSets.main.output.classesDir
+    classpath = project.sourceSets.main.compileClasspath
 
-	options.fork = properties.compilerFork.toBoolean ( )
-	options.incremental = properties.incrementalBuild.toBoolean ( )
-	options.encoding = properties.sourceEncoding
-	options.verbose = properties.verboseBuild.toBoolean ( )
-	options.debug = false
+    options.fork = properties.compilerFork.toBoolean()
+    options.incremental = properties.incrementalBuild.toBoolean()
+    options.encoding = properties.sourceEncoding
+    options.verbose = properties.verboseBuild.toBoolean()
+    options.debug = false
 }
 
 
 task createAssemblies {
-	createAssemblies.description = 'Creates the assemblies, one version per build type.'
-	createAssemblies.dependsOn 'clean', 'createAssemblyRelease', 'createAssemblyDebug'
+    createAssemblies.description = 'Creates the assemblies, one version per build type.'
+    createAssemblies.dependsOn 'clean', 'createAssemblyRelease', 'createAssemblyDebug'
 
-	doFirst ( ) {
-		println 'Creating assemblies for `numbers-and-letters`...'
-	}
+    doFirst() {
+        println 'Creating assemblies for `numbers-and-letters`...'
+    }
 }
 
 
-task createAssemblyDebug (type: Jar) {
-	createAssemblyDebug.description = 'Creates the assembly for development/acceptance environments.'
-	createAssemblyDebug.dependsOn 'compileDebug'
+task createAssemblyDebug(type: Jar) {
+    createAssemblyDebug.description = 'Creates the assembly for development/acceptance environments.'
+    createAssemblyDebug.dependsOn 'compileDebug'
 
-	from sourceSets.main.output
-	destinationDir = file (properties.jarDebugDir)
-	baseName = properties.assemblyName
-	version = properties.assemblyVersion
+    from sourceSets.main.output
+    destinationDir = file(properties.jarDebugDir)
+    baseName = properties.assemblyName
+    version = properties.assemblyVersion
 
-	manifest = project.manifest {
-		from sharedManifest
-	}
+    manifest = project.manifest {
+        from sharedManifest
+    }
 }
 
 
-task createAssemblyRelease (type: Jar) {
-	createAssemblyRelease.description = 'Creates the assembly for production environments.'
-	createAssemblyRelease.dependsOn 'compileRelease'
+task createAssemblyRelease(type: Jar) {
+    createAssemblyRelease.description = 'Creates the assembly for production environments.'
+    createAssemblyRelease.dependsOn 'compileRelease'
 
-	from sourceSets.main.output
-	destinationDir = file (properties.jarReleaseDir)
-	baseName = properties.assemblyName
-	version = properties.assemblyVersion
+    from sourceSets.main.output
+    destinationDir = file(properties.jarReleaseDir)
+    baseName = properties.assemblyName
+    version = properties.assemblyVersion
 
-	manifest = project.manifest {
-		from sharedManifest
-	}
+    manifest = project.manifest {
+        from sharedManifest
+    }
 }

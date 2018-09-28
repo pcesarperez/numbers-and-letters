@@ -1,4 +1,4 @@
-package com.adastrafork.numbersandletters.es;
+package com.adastrafork.numbersandletters.converters.es;
 
 
 import java.util.Collections;
@@ -10,7 +10,7 @@ import java.util.Map;
  * Class to calculate the values associated to Spanish numerals.
  */
 public final class SpanishNumeralValues {
-	private static final Map<String, Integer> SPANISH_NUMERAL_VALUES = createImmutableNumeralsMap ( );
+	private static final Map<String, Integer> SpanishNumeralValues = createImmutableNumeralsMap ( );
 
 
 	/**
@@ -81,6 +81,6 @@ public final class SpanishNumeralValues {
 	 * @return Numeric equivalent of the given Spanish numeral.
 	 */
 	public static Integer fromNumeral (String numeral) {
-		return SPANISH_NUMERAL_VALUES.get (numeral);
+		return SpanishNumeralValues.get (numeral);
 	}
 }

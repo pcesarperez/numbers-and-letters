@@ -1,4 +1,4 @@
-package com.adastrafork.numbersandletters.es.exceptions;
+package com.adastrafork.numbersandletters.exceptions;
 
 
 /**

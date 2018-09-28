@@ -1,7 +1,8 @@
-package com.adastrafork.numbersandletters.es;
+package com.adastrafork.numbersandletters.test;
 
 
-import com.adastrafork.numbersandletters.es.exceptions.UnrecognizedNumeralException;
+import com.adastrafork.numbersandletters.converters.es.SpanishNumeralsToNumbersConverter;
+import com.adastrafork.numbersandletters.exceptions.UnrecognizedNumeralException;
 
 import org.junit.jupiter.api.Test;
 

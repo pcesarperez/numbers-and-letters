@@ -1,6 +1,6 @@
 // Generated from SpanishNumerals.g4 by ANTLR 4.5.3
 
-    package com.adastrafork.numbersandletters.es.antlr4;
+    package com.adastrafork.numbersandletters.converters.es.antlr4;
 
 import org.antlr.v4.runtime.tree.ParseTreeVisitor;
 

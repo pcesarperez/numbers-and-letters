@@ -1,28 +1,21 @@
-package com.adastrafork.numbersandletters.es;
+package com.adastrafork.numbersandletters.converters.es;
 
 
-import com.adastrafork.numbersandletters.ThrowingErrorListener;
-import com.adastrafork.numbersandletters.es.antlr4.SpanishNumeralsLexer;
-import com.adastrafork.numbersandletters.es.antlr4.SpanishNumeralsParser;
-import com.adastrafork.numbersandletters.es.exceptions.UnrecognizedNumeralException;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
+
+import com.adastrafork.numbersandletters.converters.INumeralsToNumbersConverter;
+import com.adastrafork.numbersandletters.errorhandling.ThrowingErrorListener;
+import com.adastrafork.numbersandletters.converters.es.antlr4.SpanishNumeralsLexer;
+import com.adastrafork.numbersandletters.converters.es.antlr4.SpanishNumeralsParser;
+import com.adastrafork.numbersandletters.exceptions.UnrecognizedNumeralException;
 
 
 /**
  * Class to convert Spanish numerals to their numeric equivalents.
  */
-public class SpanishNumeralsToNumbersConverter {
-
-
-	/**
-	 * Sets up the converter.
-	 */
-	public SpanishNumeralsToNumbersConverter ( ) {
-	}
-
-
+public class SpanishNumeralsToNumbersConverter implements INumeralsToNumbersConverter {
 	/**
 	 * Converts a Spanish numeral expression to its numeric equivalent.
 	 *
@@ -30,7 +23,7 @@ public class SpanishNumeralsToNumbersConverter {
 	 *
 	 * @return The numeric equivalent of the numeral expression.
 	 *
-	 * @throws UnrecognizedNumeralException
+	 * @throws UnrecognizedNumeralException Exception thrown when the numeral expression is not valid.
 	 */
 	public Integer convertNumeralToNumber (String numeralExpression) throws UnrecognizedNumeralException {
 		SpanishNumeralsLexer lexer = newLexer (numeralExpression);
@@ -40,7 +33,7 @@ public class SpanishNumeralsToNumbersConverter {
 		try {
 			tree = parser.numeralExpression ( );
 		} catch (Exception e) {
-			throw new UnrecognizedNumeralException ("The Spanish numeral expression is not valid: ", e);
+			throw new UnrecognizedNumeralException (String.format ("The Spanish numeral expression '{0}' is not valid.", numeralExpression), e);
 		}
 
 		SpanishNumeralRecognitionEngine engine = new SpanishNumeralRecognitionEngine ( );

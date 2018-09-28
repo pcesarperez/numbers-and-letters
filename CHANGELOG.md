@@ -1,5 +1,15 @@
 # Changelog
 
+## 28/09/2018 v1.0 RC5
+
+A bit of tidying up, including...
+
+* Removing the `Test` class.
+* Adding JUnit dependencies to the Gradle build file.
+* Removing the `SpanishNumeralRule` class.
+* Reordering the packages.
+* Creating packages for the future English, German and French converters.
+
 ## 27/09/2018 v1.0 RC4
 
 It's been a long time...

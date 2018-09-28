@@ -1,8 +1,8 @@
-package com.adastrafork.numbersandletters.es;
+package com.adastrafork.numbersandletters.converters.es;
 
 
-import com.adastrafork.numbersandletters.es.antlr4.SpanishNumeralsBaseVisitor;
-import com.adastrafork.numbersandletters.es.antlr4.SpanishNumeralsParser;
+import com.adastrafork.numbersandletters.converters.es.antlr4.SpanishNumeralsBaseVisitor;
+import com.adastrafork.numbersandletters.converters.es.antlr4.SpanishNumeralsParser;
 
 
 /**
