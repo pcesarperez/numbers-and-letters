@@ -1,0 +1,9 @@
+/*
+ * settings.gradle
+ *
+ * Gradle settings file for `numbers-and-letters` library.
+ */
+
+// This option ensures we don't get a deprecation warning due to changes expected in Gradle 5.0.
+// https://docs.gradle.org/4.10.2/userguide/publishing_maven.html#publishing_maven:deferred_configuration
+enableFeaturePreview ('STABLE_PUBLISHING')

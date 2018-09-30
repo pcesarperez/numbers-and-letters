@@ -11,13 +11,26 @@ apply plugin: 'java'
 apply plugin: 'antlr'
 apply plugin: 'maven-publish'
 
+
+sourceSets {
+    main {
+        java {
+            sourceSets.main.output.classesDir = new File (buildDir, "classes/java/main")
+            sourceSets.test.output.classesDir = new File (buildDir, "classes/java/test")
+        }
+    }
+}
+
+
 // External properties.
 Properties properties = new Properties ( )
 properties.load(new FileInputStream ('build.properties'))
 
+
 // Maven coordinates.
 group = properties.assemblyGroup
 version = properties.assemblyVersion
+
 
 // MANIFEST.MF information.
 ext.sharedManifest = manifest {
@@ -32,11 +45,13 @@ ext.sharedManifest = manifest {
     )
 }
 
+
 // We are using both Maven central and the local Maven repo.
 repositories {
     mavenCentral ( )
     mavenLocal ( )
 }
+
 
 // Use `gradle publishToMavenLocal` to upload the assembly to the local Maven repository.
 publishing {
@@ -47,20 +62,14 @@ publishing {
     }
 }
 
+
 // Compiler settings.
 sourceCompatibility = properties.sourceCompatibility
 targetCompatibility = properties.targetCompatibility
 
 
 generateGrammarSource {
-    outputDirectory = new File (properties.antlrGeneratedSourceDir)
     arguments += ['-visitor', '-no-listener']
-}
-
-// This seems to be the way to tell ANTLR plugin where the grammar is.
-// That is, if the grammar is not placed in the default location.
-sourceSets {
-    main.antlr.srcDirs = [properties.antlrGrammarsDir]
 }
 
 
@@ -90,6 +99,7 @@ task info {
     }
 }
 
+
 classes {
     actions = []
 }
@@ -99,7 +109,7 @@ task compileDebug (type: JavaCompile) {
     compileDebug.description = 'Compiles the source code with debug symbols.'
     compileDebug.dependsOn 'generateGrammarSource'
 
-    source = fileTree (dir: properties.mainSourceDir, include: '**/*.java')
+    //source = fileTree (dir: properties.mainSourceDir, include: '**/*.java')
     destinationDir = sourceSets.main.output.classesDir
     classpath = project.sourceSets.main.compileClasspath
 
@@ -112,11 +122,11 @@ task compileDebug (type: JavaCompile) {
 }
 
 
-task compileRelease(type: JavaCompile) {
+task compileRelease (type: JavaCompile) {
     compileRelease.description = 'Compiles the source code without debug symbols.'
     compileRelease.dependsOn 'generateGrammarSource'
 
-    source = fileTree (dir: properties.mainSourceDir, include: '**/*.java')
+    //source = fileTree (dir: properties.mainSourceDir, include: '**/*.java')
     destinationDir = sourceSets.main.output.classesDir
     classpath = project.sourceSets.main.compileClasspath
 

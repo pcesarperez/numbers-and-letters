@@ -10,7 +10,7 @@ grammar SpanishNumerals;
  * Java package of the generated sources.
  */
 @header {
-    package com.adastrafork.numbersandletters.es.antlr4;
+package com.adastrafork.numbersandletters.converters.es.antlr4;
 }
 
 
