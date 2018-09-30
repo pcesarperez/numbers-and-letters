@@ -10,11 +10,15 @@ defaultTasks 'createAssemblies'
 apply plugin: 'java'
 apply plugin: 'antlr'
 apply plugin: 'maven-publish'
+apply plugin: 'idea'
 
 
 sourceSets {
     main {
         java {
+            // IntelliJ Idea needs the generated sources folder explicitly declared.
+            // https://discuss.gradle.org/t/how-do-i-get-intellij-to-recognize-gradle-generated-sources-dir/16847/4
+            sourceSets.main.java.srcDir new File (buildDir, 'generated-src/antlr/main')
             sourceSets.main.output.classesDir = new File (buildDir, "classes/java/main")
             sourceSets.test.output.classesDir = new File (buildDir, "classes/java/test")
         }
@@ -22,9 +26,18 @@ sourceSets {
 }
 
 
+// IntelliJ Idea needs the generated sources folder explicitly declared.
+// https://discuss.gradle.org/t/how-do-i-get-intellij-to-recognize-gradle-generated-sources-dir/16847/4
+idea {
+    module {
+        generatedSourceDirs += file ('build/generated-src/antlr/main')
+    }
+}
+
+
 // External properties.
 Properties properties = new Properties ( )
-properties.load(new FileInputStream ('build.properties'))
+properties.load (new FileInputStream ('build.properties'))
 
 
 // Maven coordinates.
