@@ -82,6 +82,7 @@ targetCompatibility = properties.targetCompatibility
 
 
 generateGrammarSource {
+    arguments += ['-package', 'com.adastrafork.numbersandletters.generated.antlr4']
     arguments += ['-visitor', '-no-listener']
 }
 
@@ -122,7 +123,6 @@ task compileDebug (type: JavaCompile) {
     compileDebug.description = 'Compiles the source code with debug symbols.'
     compileDebug.dependsOn 'generateGrammarSource'
 
-    //source = fileTree (dir: properties.mainSourceDir, include: '**/*.java')
     destinationDir = sourceSets.main.output.classesDir
     classpath = project.sourceSets.main.compileClasspath
 
@@ -139,7 +139,6 @@ task compileRelease (type: JavaCompile) {
     compileRelease.description = 'Compiles the source code without debug symbols.'
     compileRelease.dependsOn 'generateGrammarSource'
 
-    //source = fileTree (dir: properties.mainSourceDir, include: '**/*.java')
     destinationDir = sourceSets.main.output.classesDir
     classpath = project.sourceSets.main.compileClasspath
 

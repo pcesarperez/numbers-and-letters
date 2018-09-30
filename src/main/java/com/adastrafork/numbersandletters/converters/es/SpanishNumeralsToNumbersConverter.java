@@ -8,8 +8,9 @@ import org.antlr.v4.runtime.tree.ParseTree;
 import com.adastrafork.numbersandletters.converters.INumeralsToNumbersConverter;
 import com.adastrafork.numbersandletters.errorhandling.ThrowingErrorListener;
 import com.adastrafork.numbersandletters.exceptions.UnrecognizedNumeralException;
-import com.adastrafork.numbersandletters.converters.es.antlr4.SpanishNumeralsLexer;
-import com.adastrafork.numbersandletters.converters.es.antlr4.SpanishNumeralsParser;
+
+import com.adastrafork.numbersandletters.generated.antlr4.SpanishNumeralsLexer;
+import com.adastrafork.numbersandletters.generated.antlr4.SpanishNumeralsParser;
 
 
 /**

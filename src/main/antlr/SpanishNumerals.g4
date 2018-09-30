@@ -7,14 +7,6 @@ grammar SpanishNumerals;
 
 
 /*
- * Java package of the generated sources.
- */
-@header {
-package com.adastrafork.numbersandletters.converters.es.antlr4;
-}
-
-
-/*
  * This is the root rule.
  * Any Spanish numeral should fit one of the inner rules.
  */
