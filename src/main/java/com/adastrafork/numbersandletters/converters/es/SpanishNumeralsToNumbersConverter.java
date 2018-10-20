@@ -34,7 +34,7 @@ public class SpanishNumeralsToNumbersConverter implements INumeralsToNumbersConv
 		try {
 			tree = parser.numeralExpression ( );
 		} catch (Exception e) {
-			throw new UnrecognizedNumeralException (String.format ("The Spanish numeral expression '{0}' is not valid.", numeralExpression), e);
+			throw new UnrecognizedNumeralException (String.format ("The Spanish numeral expression '%s' is not valid.", numeralExpression), e);
 		}
 
 		SpanishNumeralRecognitionEngine engine = new SpanishNumeralRecognitionEngine ( );

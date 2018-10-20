@@ -9,9 +9,9 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 
-public class SpanishNumeralsToNumbersConverterTest {
+class SpanishNumeralsToNumbersConverterTest {
 	@Test
-	public void testRuleR0 ( ) {
+	void testRuleR0 ( ) {
 		SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 		try {
@@ -22,7 +22,7 @@ public class SpanishNumeralsToNumbersConverterTest {
 
 
 	@Test
-	public void testRuleR1 ( ) {
+	void testRuleR1 ( ) {
 		SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 		try {
@@ -41,7 +41,7 @@ public class SpanishNumeralsToNumbersConverterTest {
 
 
 	@Test
-	public void testRuleR2 ( ) {
+	void testRuleR2 ( ) {
 		SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 		try {
@@ -71,7 +71,7 @@ public class SpanishNumeralsToNumbersConverterTest {
 
 
 	@Test
-	public void testRuleR3 ( ) {
+	void testRuleR3 ( ) {
 		SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 		try {
@@ -151,7 +151,7 @@ public class SpanishNumeralsToNumbersConverterTest {
 
 
 	@Test
-	public void testRuleR4 ( ) {
+	void testRuleR4 ( ) {
 		SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 		try {
@@ -162,7 +162,7 @@ public class SpanishNumeralsToNumbersConverterTest {
 
 
 	@Test
-	public void testRuleR5 ( ) {
+	void testRuleR5 ( ) {
 		SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 		try {
@@ -271,7 +271,7 @@ public class SpanishNumeralsToNumbersConverterTest {
 
 
 	@Test
-	public void testRuleR6 ( ) {
+	void testRuleR6 ( ) {
 		SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 		try {
@@ -1081,7 +1081,7 @@ public class SpanishNumeralsToNumbersConverterTest {
 
 
 	@Test
-	public void testUnrecognizedNumerals ( ) {
+	void testUnrecognizedNumerals ( ) {
 		SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 		assertThrows (UnrecognizedNumeralException.class, ( ) -> {
@@ -1089,7 +1089,7 @@ public class SpanishNumeralsToNumbersConverterTest {
 		});
 
 		assertThrows (UnrecognizedNumeralException.class, ( ) -> {
-			numeralsConverter.convertNumeralToNumber ("cuarenta y cero");
+			numeralsConverter.convertNumeralToNumber ("cuarenta fucker");
 		});
 	}
 }

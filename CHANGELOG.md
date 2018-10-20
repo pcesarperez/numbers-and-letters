@@ -1,5 +1,11 @@
 # Changelog
 
+## 20/10/2018 v1.0RC7
+
+Well, I have added English numerals to the mix, including unit tests. I have also improved the code generation from ANTLR grammars, further smoothing out the handling of parser/lexer files.
+
+However, there are corner cases that I cannot test properly. For example, the string "twenty zero" is valid (!) and yields a result of 20. In fact, the string "twenty motherfuckers" will yield the same result. I suspect that I am not handling whitespaces quite right, so further investigation is required.
+
 ## 20/10/2018 v1.0RC6
 
 I have almost ready the remaining grammars (English, French and German), but in doing so, I realized that the Spanish grammar could be rewritten to take advantage of rule reusing, thus getting rid of the `units` ancillary rule.
@@ -51,7 +57,7 @@ Then came Gradle. It's been a while since I started reading about it, with the s
 
 So, here we go. This is my first implementation of a Gradle build script, and it has been a rough one. Gradle is not ready to perform certain tasks out-of-the-box, like packaging two different assemblies depending on the inclusion of debug symbols (to my knowledge, at least).
 
-But, you know, Gradle is, in fact, build upon Groovy. And this makes possible to do a bit of tweaking to get the results you want.
+But, you know, Gradle is, in fact, built upon Groovy. And this makes possible to do a bit of tweaking to get the results you want.
 
 The second thing I changed was the conversion engine. The first version covered numerals from "cero" (0) to "noventa y nueve" (99). The rules needed to recognize these numerals were labeled from `r0` to `r2`, and these were plain rules, with no recursion at all.
 

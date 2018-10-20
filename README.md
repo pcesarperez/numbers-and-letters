@@ -1,4 +1,4 @@
-# Numbers and Letters 1.0RC6
+# Numbers and Letters 1.0RC7
 
 ## What the hell is this?
 
@@ -15,9 +15,12 @@ For example:
 
 This is a highly experimental project, and thus, is not ready for public consumption. Yet.
 
-I am Spanish, so I am building Spanish mode first. The library performs conversion from "cero" (0) to "novecientos noventa y nueve" (999), for now.
+The library performs the following conversions, for now:
 
-But I'm planning for the future. That's what I would like to achieve:
+* **Spanish**: from "cero" (0) to "novecientos noventa y nueve" (999).
+* **English**: from "zero" (0) to "nine hundred and ninety-nine" (999).
+
+However, I'm planning for the future. That's what I would like to achieve:
 
 1. Expand the range of accepted Spanish numerals to:
     - Thousands. For example "mil" (1000), "tres mil uno" (3001) or "dos mil cuatrocientos cincuenta y ocho" (2458).
@@ -52,7 +55,7 @@ These are the Maven coordinates of the library, which you can see in the `build.
 
 * Group: `com.adastrafork`
 * Artifact: `numbers-and-letters`
-* Version: 1.0RC6
+* Version: 1.0RC7
 
 ## How to use the library
 
@@ -62,9 +65,11 @@ To use the library, you just have to import it into your project, either directl
 * Artifact: `antlr4-runtime`
 * Version: 4.5.3
 
-Then, you have to create an instance of the class `SpanishNumeralsToNumbersConverter`, which has a public method named `convertNumeralToNumber ( )`.
+Then, you have to create an instance of the corresponding converter class, which has a public method named `convertNumeralToNumber ( )`.
 
-For instance:
+When the parser encounters a syntax error, it throws an `UnrecognizedNumeralException` and aborts the parsing process, thus capturing invalid numerals.
+
+### Spanish numerals converter
 
 ```Java
 SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
@@ -76,4 +81,14 @@ try {
 }
 ```
 
-When the parser encounters a syntax error, it throws an `UnrecognizedNumeralException` and aborts the parsing process, thus capturing invalid numerals.
+### English numerals converter
+
+```Java
+EnglishNumeralsToNumbersConverter numeralsConverter = new EnglishNumeralsToNumbersConverter ( );
+
+try {
+    System.out.println (numeralsConverter.convertNumeralToNumber ("nine hundred and ninety-nine"));
+} catch (UnrecognizedNumeralException e) {
+    e.printStackTrace ( );
+}
+```

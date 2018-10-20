@@ -103,6 +103,12 @@ generateGrammarSource {
 
     arguments += ['-package', 'com.adastrafork.numbersandletters.generated.antlr4']
     arguments += ['-visitor', '-no-listener']
+    outputDirectory = new File (buildDir, properties.generatedSourcesDir.toString ( ))
+}
+
+
+clean {
+    delete "generated-src"
 }
 
 
