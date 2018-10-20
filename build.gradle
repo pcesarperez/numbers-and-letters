@@ -14,15 +14,30 @@ apply plugin: 'idea'
 
 
 sourceSets {
-    main {
+    debug {
         java {
-            // IntelliJ Idea needs the generated sources folder explicitly declared.
-            // https://discuss.gradle.org/t/how-do-i-get-intellij-to-recognize-gradle-generated-sources-dir/16847/4
-            sourceSets.main.java.srcDir new File (buildDir, 'generated-src/antlr/main')
-            sourceSets.main.output.classesDir = new File (buildDir, "classes/java/main")
-            sourceSets.test.output.classesDir = new File (buildDir, "classes/java/test")
+            srcDirs = ["src/main/java", new File (buildDir, 'generated-src/antlr/main')]
+            outputDir = new File (buildDir, "debug/classes/java/main")
+        }
+
+        resources {
+            srcDirs = ["src/main/resources"]
         }
     }
+
+    release {
+        java {
+            srcDirs = ["src/main/java", new File (buildDir, 'generated-src/antlr/main')]
+            outputDir = new File (buildDir, "release/classes/java/main")
+        }
+
+        resources {
+            srcDirs = ["src/main/resources"]
+        }
+    }
+
+    main.java.outputDir = new File (buildDir, "classes/java/main")
+    test.java.outputDir = new File (buildDir, "classes/java/test")
 }
 
 
@@ -30,7 +45,7 @@ sourceSets {
 // https://discuss.gradle.org/t/how-do-i-get-intellij-to-recognize-gradle-generated-sources-dir/16847/4
 idea {
     module {
-        generatedSourceDirs += file ('build/generated-src/antlr/main')
+        generatedSourceDirs += file ('build/generated-src')
     }
 }
 
@@ -47,14 +62,14 @@ version = properties.assemblyVersion
 
 // MANIFEST.MF information.
 ext.sharedManifest = manifest {
-    attributes(
-            'Specification-Title': properties.specificationTitle,
-            'Specification-Version': properties.specificationVersion,
-            'Specification-Vendor': properties.specificationVendor,
-            'Implementation-Title': properties.implementationTitle,
-            'Implementation-Version': properties.implementationVersion,
-            'Implementation-Vendor': properties.implementationVendor,
-            'Class-Path': properties.classPath
+    attributes (
+        'Specification-Title': properties.specificationTitle,
+        'Specification-Version': properties.specificationVersion,
+        'Specification-Vendor': properties.specificationVendor,
+        'Implementation-Title': properties.implementationTitle,
+        'Implementation-Version': properties.implementationVersion,
+        'Implementation-Vendor': properties.implementationVendor,
+        'Class-Path': properties.classPath
     )
 }
 
@@ -82,6 +97,10 @@ targetCompatibility = properties.targetCompatibility
 
 
 generateGrammarSource {
+    doFirst ( ) {
+        println "Generating source code from grammar files..."
+    }
+
     arguments += ['-package', 'com.adastrafork.numbersandletters.generated.antlr4']
     arguments += ['-visitor', '-no-listener']
 }
@@ -114,16 +133,13 @@ task info {
 }
 
 
-classes {
-    actions = []
-}
+task compileDebug (type: JavaCompile, dependsOn: ['clean', 'generateGrammarSource']) {
+    doFirst ( ) {
+        println "Compiling debug code..."
+    }
 
-
-task compileDebug (type: JavaCompile) {
-    compileDebug.description = 'Compiles the source code with debug symbols.'
-    compileDebug.dependsOn 'generateGrammarSource'
-
-    destinationDir = sourceSets.main.output.classesDir
+    source = sourceSets.debug.java.srcDirs
+    destinationDir = sourceSets.debug.java.outputDir
     classpath = project.sourceSets.main.compileClasspath
 
     options.fork = properties.compilerFork.toBoolean ( )
@@ -135,11 +151,13 @@ task compileDebug (type: JavaCompile) {
 }
 
 
-task compileRelease (type: JavaCompile) {
-    compileRelease.description = 'Compiles the source code without debug symbols.'
-    compileRelease.dependsOn 'generateGrammarSource'
+task compileRelease (type: JavaCompile, dependsOn: ['clean', 'generateGrammarSource']) {
+    doFirst ( ) {
+        println "Compiling release code..."
+    }
 
-    destinationDir = sourceSets.main.output.classesDir
+    source = sourceSets.release.java.srcDirs
+    destinationDir = sourceSets.release.java.outputDir
     classpath = project.sourceSets.main.compileClasspath
 
     options.fork = properties.compilerFork.toBoolean ( )
@@ -150,21 +168,15 @@ task compileRelease (type: JavaCompile) {
 }
 
 
-task createAssemblies {
-    createAssemblies.description = 'Creates the assemblies, one version per build type.'
-    createAssemblies.dependsOn 'clean', 'createAssemblyRelease', 'createAssemblyDebug'
+task createAssemblies (dependsOn: ['createAssemblyDebug', 'createAssemblyRelease'])
 
+
+task createAssemblyDebug (type: Jar, dependsOn: 'compileDebug') {
     doFirst ( ) {
-        println 'Creating assemblies for `numbers-and-letters`...'
+        println 'Creating assembly for development/acceptance environments...'
     }
-}
 
-
-task createAssemblyDebug (type: Jar) {
-    createAssemblyDebug.description = 'Creates the assembly for development/acceptance environments.'
-    createAssemblyDebug.dependsOn 'compileDebug'
-
-    from sourceSets.main.output
+    from sourceSets.debug.java.outputDir
     destinationDir = file (properties.jarDebugDir)
     baseName = properties.assemblyName
     version = properties.assemblyVersion
@@ -175,11 +187,12 @@ task createAssemblyDebug (type: Jar) {
 }
 
 
-task createAssemblyRelease (type: Jar) {
-    createAssemblyRelease.description = 'Creates the assembly for production environments.'
-    createAssemblyRelease.dependsOn 'compileRelease'
+task createAssemblyRelease (type: Jar, dependsOn: 'compileRelease') {
+    doFirst ( ) {
+        println 'Creting assembly for production environments...'
+    }
 
-    from sourceSets.main.output
+    from sourceSets.release.java.outputDir
     destinationDir = file (properties.jarReleaseDir)
     baseName = properties.assemblyName
     version = properties.assemblyVersion
