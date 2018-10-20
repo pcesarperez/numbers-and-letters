@@ -26,7 +26,7 @@ public final class ThrowingErrorListener extends BaseErrorListener {
 	 * @param msg Error message.
 	 * @param e Internal error captured.
 	 *
-	 * @throws ParseCancellationException
+	 * @throws ParseCancellationException Exception thrown when the parsing process is cancelled due to a syntax error.
 	 */
 	@Override
 	public void syntaxError (Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e) throws ParseCancellationException {

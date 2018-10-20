@@ -10,7 +10,7 @@ import java.util.Map;
  * Class to calculate the values associated to English numerals.
  */
 final class EnglishNumeralValues {
-	private static Map<String, Integer> SpanishNumeralValues = createImmutableNumeralsMap ( );
+	private static final Map<String, Integer> SpanishNumeralValues = createImmutableNumeralsMap ( );
 
 
 	/**

@@ -1974,30 +1974,14 @@ class EnglishNumeralsToNumbersConverterTest {
 	void testUnrecognizedNumerals ( ) {
 		EnglishNumeralsToNumbersConverter numeralsConverter = new EnglishNumeralsToNumbersConverter ( );
 
-		try {
-			System.out.println (numeralsConverter.convertNumeralToNumber ("zero fucker"));
-		} catch (Exception e) {
-			System.out.println (e);
-		}
+		assertThrows (UnrecognizedNumeralException.class, ( ) -> numeralsConverter.convertNumeralToNumber ("eightyyyyy"));
 
-		assertThrows (UnrecognizedNumeralException.class, ( ) -> {
-			numeralsConverter.convertNumeralToNumber ("eightyyyyy");
-		});
+		assertThrows (UnrecognizedNumeralException.class, ( ) -> numeralsConverter.convertNumeralToNumber ("twenty and zero"));
 
-		assertThrows (UnrecognizedNumeralException.class, ( ) -> {
-			numeralsConverter.convertNumeralToNumber ("twenty and zero");
-		});
+		assertThrows (UnrecognizedNumeralException.class, ( ) -> numeralsConverter.convertNumeralToNumber ("twenty-nine hundred and five"));
 
-		assertThrows (UnrecognizedNumeralException.class, ( ) -> {
-			numeralsConverter.convertNumeralToNumber ("twenty-nine hundred and five");
-		});
+		assertThrows (UnrecognizedNumeralException.class, ( ) -> numeralsConverter.convertNumeralToNumber ("forty seventy-one"));
 
-		assertThrows (UnrecognizedNumeralException.class, ( ) -> {
-			numeralsConverter.convertNumeralToNumber ("forty seventy-one");
-		});
-
-		assertThrows (UnrecognizedNumeralException.class, ( ) -> {
-			numeralsConverter.convertNumeralToNumber ("fuck thirty-five fuckers");
-		});
+		assertThrows (UnrecognizedNumeralException.class, ( ) -> numeralsConverter.convertNumeralToNumber ("fuck thirty-five fuckers"));
 	}
 }

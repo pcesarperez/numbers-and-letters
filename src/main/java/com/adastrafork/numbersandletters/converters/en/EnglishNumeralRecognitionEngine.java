@@ -8,7 +8,7 @@ import com.adastrafork.numbersandletters.generated.antlr4.EnglishNumeralsParser;
 /**
  * Class to visit the nodes of the tree wich add value to the result of the evaluation of a English numeral.
  */
-public final class EnglishNumeralRecognitionEngine extends EnglishNumeralsBaseVisitor<Integer> {
+final class EnglishNumeralRecognitionEngine extends EnglishNumeralsBaseVisitor<Integer> {
 	@Override
 	public Integer visitNumeralExpression (EnglishNumeralsParser.NumeralExpressionContext ctx) {
 		return super.visitNumeralExpression (ctx);

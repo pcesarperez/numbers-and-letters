@@ -8,7 +8,7 @@ import com.adastrafork.numbersandletters.generated.antlr4.SpanishNumeralsParser;
 /**
  * Class to visit the nodes of the tree wich add value to the result of the evaluation of a Spanish numeral.
  */
-public final class SpanishNumeralRecognitionEngine extends SpanishNumeralsBaseVisitor<Integer> {
+final class SpanishNumeralRecognitionEngine extends SpanishNumeralsBaseVisitor<Integer> {
 	@Override
 	public Integer visitNumeralExpression (SpanishNumeralsParser.NumeralExpressionContext ctx) {
 		return super.visitNumeralExpression (ctx);

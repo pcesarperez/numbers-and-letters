@@ -1084,12 +1084,8 @@ class SpanishNumeralsToNumbersConverterTest {
 	void testUnrecognizedNumerals ( ) {
 		SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
-		assertThrows (UnrecognizedNumeralException.class, ( ) -> {
-			numeralsConverter.convertNumeralToNumber ("ochentaaaa");
-		});
+		assertThrows (UnrecognizedNumeralException.class, ( ) -> numeralsConverter.convertNumeralToNumber ("ochentaaaa"));
 
-		assertThrows (UnrecognizedNumeralException.class, ( ) -> {
-			numeralsConverter.convertNumeralToNumber ("cuarenta fucker");
-		});
+		assertThrows (UnrecognizedNumeralException.class, ( ) -> numeralsConverter.convertNumeralToNumber ("cuarenta fucker"));
 	}
 }

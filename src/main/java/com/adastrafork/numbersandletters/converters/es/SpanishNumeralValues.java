@@ -9,7 +9,7 @@ import java.util.Map;
 /**
  * Class to calculate the values associated to Spanish numerals.
  */
-public final class SpanishNumeralValues {
+final class SpanishNumeralValues {
 	private static final Map<String, Integer> SpanishNumeralValues = createImmutableNumeralsMap ( );
 
 
@@ -18,7 +18,7 @@ public final class SpanishNumeralValues {
 	 *
 	 * @return An immutable map of numerals and their values.
 	 */
-	private static final Map<String, Integer> createImmutableNumeralsMap ( ) {
+	private static Map<String, Integer> createImmutableNumeralsMap ( ) {
 		Map<String, Integer> result = new HashMap<> ( );
 
 		result.put ("uno", 1);
