@@ -1,4 +1,4 @@
-# Numbers and Letters 1.0RC5
+# Numbers and Letters 1.0RC6
 
 ## What the hell is this?
 
@@ -52,7 +52,7 @@ These are the Maven coordinates of the library, which you can see in the `build.
 
 * Group: `com.adastrafork`
 * Artifact: `numbers-and-letters`
-* Version: 1.0
+* Version: 1.0RC6
 
 ## How to use the library
 

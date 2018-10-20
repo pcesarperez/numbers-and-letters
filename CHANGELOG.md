@@ -1,5 +1,11 @@
 # Changelog
 
+## 20/10/2018 v1.0RC6
+
+I have almost ready the remaining grammars (English, French and German), but in doing so, I realized that the Spanish grammar could be rewritten to take advantage of rule reusing, thus getting rid of the `units` ancillary rule.
+
+The grammar file `SpanishGrammar.g4` has been rewritten from scratch, and I have been tinkering with the build script to segregate debug and release tasks. There are a number of issues regarding Gradle/IntelliJ Idea integration, but they are not pretty high in my list of concerns right now.
+
 ## 28/09/2018 v1.0RC5
 
 A bit of tidying up, including...
