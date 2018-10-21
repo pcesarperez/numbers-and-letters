@@ -3,6 +3,7 @@ package com.adastrafork.numbersandletters.converters.en;
 
 import com.adastrafork.numbersandletters.generated.antlr4.EnglishNumeralsBaseVisitor;
 import com.adastrafork.numbersandletters.generated.antlr4.EnglishNumeralsParser;
+import org.antlr.v4.runtime.ParserRuleContext;
 
 
 /**
@@ -11,7 +12,24 @@ import com.adastrafork.numbersandletters.generated.antlr4.EnglishNumeralsParser;
 final class EnglishNumeralRecognitionEngine extends EnglishNumeralsBaseVisitor<Integer> {
 	@Override
 	public Integer visitNumeralExpression (EnglishNumeralsParser.NumeralExpressionContext ctx) {
-		return super.visitNumeralExpression (ctx);
+		return super.visit (ctx.children.get (0));
+	}
+
+
+	private ParserRuleContext ruleToVisit (EnglishNumeralsParser.NumeralExpressionContext ctx) {
+		if (ctx.r0 ( ) != null) {
+			return ctx.r0 ( );
+		} else if (ctx.r1 ( ) != null) {
+			return ctx.r1 ( );
+		} else if (ctx.r2 ( ) != null) {
+			return ctx.r2 ( );
+		} else if (ctx.r3 ( ) != null) {
+			return ctx.r3 ( );
+		} else if (ctx.r4 ( ) != null) {
+			return ctx.r4 ( );
+		} else {
+			return null;
+		}
 	}
 
 
@@ -60,7 +78,7 @@ final class EnglishNumeralRecognitionEngine extends EnglishNumeralsBaseVisitor<I
 		} else if (ctx.r2 ( ) != null) {
 			return hundreds + visitR2 (ctx.r2 ( ));
 		} else if (ctx.r3 ( ) != null) {
-			return hundreds +visitR3 (ctx.r3 ( ));
+			return hundreds + visitR3 (ctx.r3 ( ));
 		} else {
 			return hundreds;
 		}

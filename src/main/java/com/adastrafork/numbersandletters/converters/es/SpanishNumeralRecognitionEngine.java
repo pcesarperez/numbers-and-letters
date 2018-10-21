@@ -11,7 +11,7 @@ import com.adastrafork.numbersandletters.generated.antlr4.SpanishNumeralsParser;
 final class SpanishNumeralRecognitionEngine extends SpanishNumeralsBaseVisitor<Integer> {
 	@Override
 	public Integer visitNumeralExpression (SpanishNumeralsParser.NumeralExpressionContext ctx) {
-		return super.visitNumeralExpression (ctx);
+		return super.visit (ctx.children.get (0));
 	}
 
 

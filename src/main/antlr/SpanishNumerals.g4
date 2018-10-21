@@ -10,7 +10,7 @@ grammar SpanishNumerals;
  * This is the root rule.
  * Any Spanish numeral should fit one of the inner rules.
  */
-numeralExpression : (r0 | r1 | r2 | r3 | r4 | r5 | r6);
+numeralExpression : (r0 | r1 | r2 | r3 | r4 | r5 | r6) EOF;
 
 
 /*
@@ -66,7 +66,7 @@ r2: (
  * This rule checks the numerals from "treinta" (30) to "noventa y nueve" (99).
  * This is the first composite rule, using `r1` declared before.
  */
-r3: (tens (WHITESPACES 'y' WHITESPACES r1)?);
+r3: (tens (WHITESPACES CONNECTOR WHITESPACES r1)?);
 
 
 /*
@@ -125,6 +125,7 @@ hundreds: (
 
 
 /*
- * Helper token to hold an arbitrary number of whitespaces.
+ * Lexer tokens.
  */
+CONNECTOR: 'y';
 WHITESPACES: [ \t]+;

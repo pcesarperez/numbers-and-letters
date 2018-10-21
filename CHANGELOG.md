@@ -1,5 +1,32 @@
 # Changelog
 
+## 21/10/2018 v1.0RC8
+
+I finally managed to get rid of the fucking `NullPointerException` I had when doing something like this:
+
+```java
+System.out.println (converter.convertNumeralToNumber ("five"));
+```
+
+The exception apparently came from the `EOF` token I added to the main rule (`numeralExpression`). That built-in token gave coherence to the set of rules, at the cost of the aforementioned exception.
+
+After trying several alternatives, I found a solution, albeit by pure luck, it seems. This was the original method to visit the nodes of the main rule:
+```java
+public Integer visitNumeralExpression (SpanishNumeralsParser.NumeralExpressionContext ctx) {
+    return super.visitNumeralExpression (ctx);
+}
+```
+
+If I get rid of the terminal node (EOF, in fact), parsing the subtree, everything is fine.
+
+```java
+public Integer visitNumeralExpression (SpanishNumeralsParser.NumeralExpressionContext ctx) {
+    return super.visit (ctx.children.get (0));
+}
+```
+
+One more step towards glory!
+
 ## 20/10/2018 v1.0RC7
 
 Well, I have added English numerals to the mix, including unit tests. I have also improved the code generation from ANTLR grammars, further smoothing out the handling of parser/lexer files.
@@ -68,7 +95,7 @@ Java does not permit recursive regular expressions, unlike other languages like 
 I flirted with the idea of using standard, numbered groups, but imagine a rule like this:
 
 ```
-r8 = (((r1b | r2a | r3a | r4a | r5a | r6a) WHITESPACES) (millones) ((WHITESPACES) (r1 | r2 | r3 | r4 | r5 | r6))?)
+r8: (((r1b | r2a | r3a | r4a | r5a | r6a) WHITESPACES) (millones) ((WHITESPACES) (r1 | r2 | r3 | r4 | r5 | r6))?);
 ```
 
 This rule, once unfolded, has several dozens of lines, full of parentheses and repeating numeral strings. I am pretty good at regular expressions, but this is unmanageable, to say the least.

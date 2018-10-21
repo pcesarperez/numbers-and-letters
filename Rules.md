@@ -27,8 +27,9 @@ r2: ('diez' | 'once' | ... | 'veintinueve');
 The fourth rule, `r3`, is the first composite rule, as it has a prefix (the tens), and an optional group with a connector ("y") and a suffix (the rule `r1`, which contains the units). These numerals range from "treinta" (30) to "noventa y nueve" (99).
 
 ```
-r3: (tens (WHITESPACES 'y' WHITESPACES r1)?);
+r3: (tens (WHITESPACES CONNECTOR WHITESPACES r1)?);
 tens: ('treinta' | 'cuarenta' | ... | 'noventa');
+CONNECTOR: 'y';
 ```
 
 The fifth rule is straightforward, and covers the numeral "cien" (100). This is also a game-over rule, like `r0`.
@@ -48,6 +49,12 @@ The seventh and last rule is similar to the previous one, replacing the prefix w
 ```
 r6: (hundreds (WHITESPACES (r1 | r2 | r3))?);
 hundreds: ('doscientos' | 'trescientos' | ... | 'novecientos');
+```
+
+Once we have all the little bricks, we can build the main rule, which is:
+
+```
+numeralExpression: (r1 | r2 | r3 | r4 | r5 | r6) EOF;
 ```
 
 ## English mode
@@ -88,6 +95,12 @@ Note the optional "and" connector, covering both UK English style ("one hundred 
 r4: (r1 WHITESPACES HUNDRED (WHITESPACES (CONNECTOR WHITESPACES)? (r1 | r2 | r3))?);
 HUNDRED: 'hundred';
 CONNECTOR: 'and';
+```
+
+The final rule brings together all the little pieces.
+
+```
+numeralExpression: (r1 | r2 | r3 | r4) EOF;
 ```
 
 ## French mode

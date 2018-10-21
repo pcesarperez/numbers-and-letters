@@ -15,6 +15,12 @@ class SpanishNumeralsToNumbersConverterTest {
 		SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 		try {
+			System.out.println (numeralsConverter.convertNumeralToNumber ("cinco").intValue ( ));
+		} catch (Exception e) {
+
+		}
+
+		try {
 			assertEquals (0, numeralsConverter.convertNumeralToNumber ("cero").intValue ( ));
 		} catch (UnrecognizedNumeralException e) {
 		}

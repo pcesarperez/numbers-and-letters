@@ -10,7 +10,7 @@ grammar EnglishNumerals;
  * This is the root rule.
  * Any English numeral should fit one of the inner rules.
  */
-numeralExpression : (r0 | r1 | r2 | r3 | r4);
+numeralExpression : (r0 | r1 | r2 | r3 | r4) EOF;
 
 
 /*

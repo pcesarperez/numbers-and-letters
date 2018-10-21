@@ -1,4 +1,4 @@
-# Numbers and Letters 1.0RC7
+# Numbers and Letters 1.0RC8
 
 ## What the hell is this?
 
@@ -37,7 +37,7 @@ The building system is based on Gradle. Through the `build.gradle` script, two v
 
 In order to build the library, you just need to navigate to the project folder and run:
 
-```
+```bash
 $ gradle
 ```
 
@@ -47,7 +47,7 @@ The `.jar` files are placed under the folders `[dist/debug]` and `[dist/release]
 
 If you have a local maven repository, you can install the library there, using:
 
-```
+```bash
 $ gradle publishToMavenLocal
 ```
 
@@ -55,7 +55,7 @@ These are the Maven coordinates of the library, which you can see in the `build.
 
 * Group: `com.adastrafork`
 * Artifact: `numbers-and-letters`
-* Version: 1.0RC7
+* Version: 1.0RC8
 
 ## How to use the library
 
@@ -71,7 +71,7 @@ When the parser encounters a syntax error, it throws an `UnrecognizedNumeralExce
 
 ### Spanish numerals converter
 
-```Java
+```java
 SpanishNumeralsToNumbersConverter numeralsConverter = new SpanishNumeralsToNumbersConverter ( );
 
 try {
@@ -83,7 +83,7 @@ try {
 
 ### English numerals converter
 
-```Java
+```java
 EnglishNumeralsToNumbersConverter numeralsConverter = new EnglishNumeralsToNumbersConverter ( );
 
 try {
