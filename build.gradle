@@ -13,6 +13,9 @@ apply plugin: 'maven-publish'
 apply plugin: 'idea'
 
 
+/**
+ * Sourcesets used both for debug and release building.
+ */
 sourceSets {
     debug {
         java {
@@ -36,13 +39,16 @@ sourceSets {
         }
     }
 
-    main.java.outputDir = new File (buildDir, "classes/java/main")
     test.java.outputDir = new File (buildDir, "classes/java/test")
 }
 
 
-// IntelliJ Idea needs the generated sources folder explicitly declared.
-// https://discuss.gradle.org/t/how-do-i-get-intellij-to-recognize-gradle-generated-sources-dir/16847/4
+/**
+ * IntelliJ Idea specific properties.
+ *
+ * IntelliJ Idea needs the generated sources folder explicitly declared.
+ * https://discuss.gradle.org/t/how-do-i-get-intellij-to-recognize-gradle-generated-sources-dir/16847/4
+ */
 idea {
     module {
         generatedSourceDirs += file ('build/generated-src')
@@ -50,17 +56,23 @@ idea {
 }
 
 
-// External properties.
+/**
+ * External properties.
+ */
 Properties properties = new Properties ( )
 properties.load (new FileInputStream ('build.properties'))
 
 
-// Maven coordinates.
+/**
+ * Assembly coordinates.
+ */
 group = properties.assemblyGroup
 version = properties.assemblyVersion
 
 
-// MANIFEST.MF information.
+/**
+ * Manifest file.
+ */
 ext.sharedManifest = manifest {
     attributes (
         'Specification-Title': properties.specificationTitle,
@@ -74,14 +86,27 @@ ext.sharedManifest = manifest {
 }
 
 
-// We are using both Maven central and the local Maven repo.
+/**
+ * Repositories.
+ */
 repositories {
     mavenCentral ( )
     mavenLocal ( )
 }
 
+/**
+ * Wrapper creation.
+ */
+wrapper {
+    gradleVersion = "4.10.2"
+}
 
-// Use `gradle publishToMavenLocal` to upload the assembly to the local Maven repository.
+
+/**
+ * Publishing to local Maven repo.
+ *
+ * Use `gradle publishToMavenLocal` to upload the assembly to the local Maven repository.
+ */
 publishing {
     publications {
         mavenJava (MavenPublication) {
@@ -91,11 +116,16 @@ publishing {
 }
 
 
-// Compiler settings.
+/**
+ * Compiler settings.
+ */
 sourceCompatibility = properties.sourceCompatibility
 targetCompatibility = properties.targetCompatibility
 
 
+/**
+ * ANTLR code generation from grammars.
+ */
 generateGrammarSource {
     doFirst ( ) {
         println "Generating source code from grammar files..."
@@ -107,11 +137,17 @@ generateGrammarSource {
 }
 
 
+/**
+ * Cleaning process.
+ */
 clean {
     delete "generated-src"
 }
 
 
+/**
+ * Dependencies.
+ */
 dependencies {
     antlr "org.antlr:antlr4:4.5.3"
     runtime "org.antlr:antlr4-runtime:4.5.3"
@@ -120,11 +156,17 @@ dependencies {
 }
 
 
+/**
+ * Testing properties.
+ */
 test {
     useJUnitPlatform ( )
 }
 
 
+/**
+ * Task to show information about the assembly.
+ */
 task info {
     info.description = 'Shows assembly information.'
 
@@ -139,6 +181,9 @@ task info {
 }
 
 
+/**
+ * Task to compile the source code in debug mode.
+ */
 task compileDebug (type: JavaCompile, dependsOn: ['clean', 'generateGrammarSource']) {
     doFirst ( ) {
         println "Compiling debug code..."
@@ -157,6 +202,9 @@ task compileDebug (type: JavaCompile, dependsOn: ['clean', 'generateGrammarSourc
 }
 
 
+/**
+ * Task to compile the source code in release mode.
+ */
 task compileRelease (type: JavaCompile, dependsOn: ['clean', 'generateGrammarSource']) {
     doFirst ( ) {
         println "Compiling release code..."
@@ -174,9 +222,15 @@ task compileRelease (type: JavaCompile, dependsOn: ['clean', 'generateGrammarSou
 }
 
 
+/**
+ * Main task to create the assemblies, one per compilation mode.
+ */
 task createAssemblies (dependsOn: ['createAssemblyDebug', 'createAssemblyRelease'])
 
 
+/**
+ * Task to create the assembly using code compiled in debug mode.
+ */
 task createAssemblyDebug (type: Jar, dependsOn: 'compileDebug') {
     doFirst ( ) {
         println 'Creating assembly for development/acceptance environments...'
@@ -193,6 +247,9 @@ task createAssemblyDebug (type: Jar, dependsOn: 'compileDebug') {
 }
 
 
+/**
+ * Task to create the assembly using code compiled in release mode.
+ */
 task createAssemblyRelease (type: Jar, dependsOn: 'compileRelease') {
     doFirst ( ) {
         println 'Creting assembly for production environments...'
