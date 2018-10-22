@@ -1,5 +1,9 @@
 # Changelog
 
+## 22/10/2018 v1.0RC9
+
+This is a minor release, which includes the creation of a wrapper task in the Gradle build file. Gradle does not need to be installed in the development system anymore.
+
 ## 21/10/2018 v1.0RC8
 
 I finally managed to get rid of the fucking `NullPointerException` I had when doing something like this:
